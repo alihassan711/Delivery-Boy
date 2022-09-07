@@ -9,6 +9,7 @@ import 'package:flutter_application_1/app/routes/app_pages.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class OrderDetail extends GetView<OrderDetailController> {
   OrderDetail({Key? key}) : super(key: key);
@@ -16,6 +17,13 @@ class OrderDetail extends GetView<OrderDetailController> {
 
   @override
   Widget build(BuildContext context) {
+    final date = DateTime.now();
+    final time = DateFormat(
+            "${date.hour.toString()}-${date.minute.toString()}-${date.minute.toString()}")
+        .format(date);
+    final datee = DateFormat(
+            "${date.year.toString()}-${date.month.toString()}-${date.day.toString()}")
+        .format(date);
     return Scaffold(
       bottomSheet: Container(
         color: Abstract.btnColor,
@@ -91,7 +99,7 @@ class OrderDetail extends GetView<OrderDetailController> {
                     child: InkWell(
                       onTap: () {
                         Get.toNamed(Routes.USERCHATSCREEN,
-                            arguments: [d[0], d[2], d[6]]);
+                            arguments: [d[2], d[6]]);
                       },
                       child: Container(
                         height: 25,
@@ -152,23 +160,20 @@ class OrderDetail extends GetView<OrderDetailController> {
                               value: controller.check.value,
                               onToggle: (v) async {
                                 controller.check.value = true;
-                                await FirebaseFirestore.instance
-                                    .collection('order')
-                                    .doc(d[0])
-                                    .update({
-                                  "Order_com": DateTime.now(),
-                                  'status': true,
-                                });
 
-                                // else {
-                                //   // controller.check.value = false;
-                                //   await FirebaseFirestore.instance
-                                //       .collection('order')
-                                //       .doc(d[0])
-                                //       .update({
-                                //     'status': false,
-                                //   });
-                                // }
+                                if (controller.check.value = true) {
+                                  d[7] = controller.check.value;
+
+                                  if (d[7] == true) {
+                                    print("oooooo${d[0]}");
+                                    await FirebaseFirestore.instance
+                                        .collection('order')
+                                        .doc(d[0])
+                                        .update({
+                                      'status': true,
+                                    });
+                                  }
+                                }
                               },
                             ),
                           )
@@ -203,11 +208,15 @@ class OrderDetail extends GetView<OrderDetailController> {
                               onToggle: (v) async {
                                 if (controller.check.value == true) {
                                   controller.ischeck.value = true;
+                                  d[8] = controller.check.value;
+
                                   await FirebaseFirestore.instance
                                       .collection('order')
                                       .doc(d[0])
                                       .update({
                                     'order': true,
+                                    "Order_comp_time": time,
+                                    "Order_comp_date": datee,
                                   });
                                 }
                               },

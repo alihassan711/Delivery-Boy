@@ -25,9 +25,15 @@ class ResetPassword extends GetView<ResetController> {
           onTap: () {
             Get.back();
           },
-          child: Icon(
-            Icons.arrow_back_ios_new,
-            size: 20,
+          child: Container(
+            height: 30,
+            width: 50,
+            child: Center(
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                size: 20,
+              ),
+            ),
           ),
         ),
       ),

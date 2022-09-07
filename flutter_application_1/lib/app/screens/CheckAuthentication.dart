@@ -37,7 +37,7 @@ class CheckingScreen extends StatelessWidget {
                 User? user = streamSnapshot.data;
                 if (user == null) {
                   return LoginScreen();
-                } else if (MyPrefferenc.getEmail() == user.email) {
+                } else if (MyPrefferenc.getId() == user.email) {
                   Get.toNamed(Routes.LANDINGPAGE);
                 }
               }

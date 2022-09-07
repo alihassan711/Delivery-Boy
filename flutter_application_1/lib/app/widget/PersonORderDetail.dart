@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 
 class PersonOrderDetails extends GetView<LandingController> {
   String userName;
-  DateTime time;
+  String time;
   String orderId;
   String OrderAmount;
   String paymentType;

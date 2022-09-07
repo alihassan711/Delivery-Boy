@@ -8,11 +8,15 @@ class MyPrefferenc {
     _preferences = await SharedPreferences.getInstance();
   }
 
-  static Future saveEmail(String n) {
+  static Future saveId(String n) {
     return _preferences!.setString(keyname, n);
   }
 
-  static String getEmail() {
+  static String getId() {
     return _preferences!.getString(keyname) ?? "";
+  }
+
+  static clear() async {
+    await _preferences!.clear();
   }
 }

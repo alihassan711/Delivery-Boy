@@ -7,12 +7,19 @@ import 'package:flutter_application_1/app/screens/DashBoard.dart';
 import 'package:flutter_application_1/app/widget/PersonORderDetail.dart';
 import 'package:flutter_application_1/app/widget/dottedLIne.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class HisotryOrder extends GetView<LandingController> {
   HisotryOrder({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final date = DateTime.now();
+    final today = DateFormat(
+            "${date.year.toString()}-${date.month.toString()}-${date.day.toString()}")
+        .format(date);
+    print(
+        "eeeeeeeee${date.year.toString()}-${date.month.toString()}-${date.day.toString()}");
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(100),
@@ -48,27 +55,30 @@ class HisotryOrder extends GetView<LandingController> {
                   itemCount: controller.snapshot!.docs.length,
                   itemBuilder: (BuildContext context, int i) {
                     var data = controller.snapshot!.docs[i];
-                    Timestamp timestamp = data["Order_time"] as Timestamp;
-                    final DateTime dateTime = timestamp.toDate();
-                    return data['order'] == true
-                        ? Column(
-                            children: [
-                              PersonOrderDetails(
-                                OrderAmount: data["Order_amount"],
-                                delivery: data['Delivery'],
-                                orderId: data["Order_id"],
-                                paymentType: data['Payment_type'],
-                                pickUp: data["PickUp"],
-                                time: dateTime,
-                                userName: data["User_name"],
-                                phone: data["User_phone"],
-                                uid: "5fgDYXmpX8MdatjYpC9MfazZ65N2",
-                                status: data['status'],
-                                order: data['order'],
+
+                    return Column(
+                      children: [
+                        data['Order_comp_date'] == today
+                            ? Column(
+                                children: [
+                                  PersonOrderDetails(
+                                    OrderAmount: data["Order_amount"],
+                                    delivery: data['Delivery'],
+                                    orderId: data["Order_id"],
+                                    paymentType: data['Payment_type'],
+                                    pickUp: data["PickUp"],
+                                    time: data['Order_comp_time'],
+                                    userName: data["User_name"],
+                                    phone: data["User_phone"],
+                                    uid: "5fgDYXmpX8MdatjYpC9MfazZ65N2",
+                                    status: data['status'],
+                                    order: data['order'],
+                                  )
+                                ],
                               )
-                            ],
-                          )
-                        : Container();
+                            : Container()
+                      ],
+                    );
                   },
                 )),
           Obx(
@@ -78,9 +88,9 @@ class HisotryOrder extends GetView<LandingController> {
                     itemCount: controller.snapshot!.docs.length,
                     itemBuilder: (BuildContext context, int i) {
                       var data = controller.snapshot!.docs[i];
-                      Timestamp timestamp = data["Order_time"] as Timestamp;
-                      final DateTime dateTime = timestamp.toDate();
-                      return data['Order_com'] != DateTime.now()
+
+                      return data['order'] == true &&
+                              data['Order_comp_date'] != today
                           ? Column(
                               children: [
                                 PersonOrderDetails(
@@ -89,7 +99,7 @@ class HisotryOrder extends GetView<LandingController> {
                                   orderId: data["Order_id"],
                                   paymentType: data['Payment_type'],
                                   pickUp: data["PickUp"],
-                                  time: dateTime,
+                                  time: data['Order_comp_date'],
                                   userName: data["User_name"],
                                   phone: data["User_phone"],
                                   uid: "5fgDYXmpX8MdatjYpC9MfazZ65N2",

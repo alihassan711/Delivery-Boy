@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -37,4 +38,31 @@ class DirectionController extends GetxController {
   }
 
   TextEditingController searhC = TextEditingController();
+
+  List<LatLng> latlang = [
+    LatLng(33.738045, 73.084488),
+    LatLng(33.567997728, 72.635997456),
+  ];
+  final Set<Polyline> polylines = {};
+  final Set<Marker> marker = {};
+  @override
+  void onInit() {
+    super.onInit();
+
+    // for (var i = 0; i < latlang.length; i++) {
+    //   marker.add(
+    //     Marker(
+    //       markerId: MarkerId(i.toString()),
+    //       position: latlang[i],
+    //       infoWindow: InfoWindow(
+    //         title: "Realy  Cool",
+    //         snippet: '5 star rating',
+    //       ),
+    //       icon: BitmapDescriptor.defaultMarker,
+    //     ),
+    //   );
+    // }
+
+    // polylines.add(Polyline(polylineId: PolylineId("1"), points: latlang));
+  }
 }

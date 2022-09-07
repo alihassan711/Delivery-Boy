@@ -17,10 +17,11 @@ class UserChatScreen extends GetView<LandingController> {
 
   @override
   Widget build(BuildContext context) {
+    print("dddddddddd$d");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Abstract.btnColor,
-        title: Text("${d[1]}"),
+        title: Text("${d[0]}"),
         elevation: 0,
       ),
       body: Column(
@@ -33,7 +34,7 @@ class UserChatScreen extends GetView<LandingController> {
                     .collection("user")
                     .doc(FirebaseAuth.instance.currentUser!.uid)
                     .collection("messages")
-                    .doc(d[2])
+                    .doc(d[1])
                     .collection("chat")
                     .orderBy('date', descending: true)
                     .snapshots(),
@@ -77,17 +78,26 @@ class UserChatScreen extends GetView<LandingController> {
                   icon: Icons.send,
                   onPressed: () async {
                     if (controller.messgC.text.isNotEmpty) {
+                      FirebaseFirestore.instance
+                          .collection("messages")
+                          .doc(d[1] + FirebaseAuth.instance.currentUser!.uid)
+                          .set({
+                        "id": d[1],
+                        "name": d[0],
+                        "rider_id": FirebaseAuth.instance.currentUser!.uid,
+                        "url": ""
+                      });
                       message = controller.messgC.text;
                       controller.messgC.clear();
                       await FirebaseFirestore.instance
                           .collection("user")
                           .doc(FirebaseAuth.instance.currentUser!.uid)
                           .collection("messages")
-                          .doc(d[2])
+                          .doc(d[1])
                           .collection("chat")
                           .add({
                         "message": message,
-                        'reciverId': d[2],
+                        'reciverId': d[1],
                         'senderId': FirebaseAuth.instance.currentUser!.uid,
                         'date': DateTime.now()
                       }).then((value) => {
@@ -95,10 +105,10 @@ class UserChatScreen extends GetView<LandingController> {
                                     .collection("user")
                                     .doc(FirebaseAuth.instance.currentUser!.uid)
                                     .collection("messages")
-                                    .doc(d[2])
+                                    .doc(d[1])
                                     .set({
                                   'last_msg': message,
-                                  'reciverId': d[2],
+                                  'reciverId': d[1],
                                 })
                               });
                       await FirebaseFirestore.instance
@@ -116,16 +126,12 @@ class UserChatScreen extends GetView<LandingController> {
                         (value) => {
                           FirebaseFirestore.instance
                               .collection("user")
-                              .doc(d[2])
+                              .doc(d[1])
                               .collection("messages")
                               .doc(FirebaseAuth.instance.currentUser!.uid)
                               .set({
                             'last_msg': message,
                             "reciverId": FirebaseAuth.instance.currentUser!.uid,
-                            // 'reciverName':
-                            //     FirebaseAuth.instance.currentUser!.displayName,
-                            // 'reciverURl':
-                            //     FirebaseAuth.instance.currentUser!.photoURL,
                           })
                         },
                       );

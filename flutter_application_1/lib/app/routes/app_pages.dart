@@ -92,7 +92,7 @@ class AppPages {
     GetPage(
       name: _Paths.USERCHATSCREEN,
       page: () => UserChatScreen(),
-      binding: OrderDetailBindig(),
+      binding: LandingBinding(),
     ),
   ];
 }

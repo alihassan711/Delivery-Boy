@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/constant/Color.dart';
+import 'package:flutter_application_1/app/routes/app_pages.dart';
+import 'package:get/get.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({Key? key}) : super(key: key);
@@ -20,32 +22,53 @@ class ChatScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection("user").snapshots(),
+        stream: FirebaseFirestore.instance.collection("messages").snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.data == null) {
             return Center(child: CircularProgressIndicator());
           }
-          int data1 = snapshot.data!.docs.length;
-          print("as${data1}");
-          List data = [];
           return ListView.builder(
-              shrinkWrap: true,
               itemCount: snapshot.data!.docs.length,
-              itemBuilder: (BuildContext context, int index) {
-                if (snapshot.data!.docs[index]['type'] == "rider") {
-                  for (var element in snapshot.data!.docs[index]['users']) {
-                    data.add(element);
-                  }
-                }
-                print("aaaaaaaa${data.length}");
-                return snapshot.data!.docs[index]['type'] == "rider"
-                    ? Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 3),
+              itemBuilder: (BuildContext context, int i) {
+                return snapshot.data!.docs[i]['rider_id'] ==
+                        FirebaseAuth.instance.currentUser!.uid
+                    ? InkWell(
+                        onTap: () {
+                          Get.toNamed(
+                            Routes.USERCHATSCREEN,
+                            arguments: [
+                              snapshot.data!.docs[i]['name'],
+                              snapshot.data!.docs[i]['id'],
+                            ],
+                          );
+                        },
                         child: Container(
-                          height: 40,
+                          height: 70,
                           child: Card(
                             elevation: 0,
-                            child: Center(child: Text(data[index]['name'])),
+                            child: Center(
+                              child: Row(
+                                children: [
+                                  SizedBox(width: 5),
+                                  // CircleAvatar(
+                                  //   backgroundColor: Colors.white,
+                                  //   radius: 25,
+                                  //   child: data[0]['url'] == ""
+                                  //       ? Image.asset(
+                                  //           "images/profile1.png")
+                                  //       : Image.network(
+                                  //           data[i]['url']),
+                                  // ),
+                                  SizedBox(width: 15),
+                                  Text(
+                                    snapshot.data!.docs[i]['name'],
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                         ),
                       )
@@ -55,4 +78,15 @@ class ChatScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+class User {
+  String? id;
+  String? name;
+  String? url;
+  User({
+    this.id,
+    this.name,
+    this.url,
+  });
 }

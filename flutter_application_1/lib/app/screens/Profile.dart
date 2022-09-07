@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/constant/Color.dart';
+import 'package:flutter_application_1/app/data/Services.dart';
 import 'package:flutter_application_1/app/modules/home/controllers/LandingController.dart';
 import 'package:flutter_application_1/app/routes/app_pages.dart';
 import 'package:flutter_application_1/app/utils.dart/DeliveryButton.dart';
@@ -43,35 +44,38 @@ class ProfilePage extends GetView<LandingController> {
                       height: 100,
                       color: Abstract.btnColor,
                       child: Center(
-                          child: Obx(
-                        () => CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 40,
-                          child: controller.reload.value == ""
-                              ? InkWell(
-                                  onTap: () {
-                                    controller.upLoadPic();
-                                  },
-                                  child: Image.asset("images/profile1.png"),
-                                )
-                              : ClipOval(
-                                  child: ClipOval(
-                                  child: Image.network(controller.reload.value),
-                                )
-                                  // CachedNetworkImage(
+                        child: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 40,
+                            child: Obx(
+                              () => controller.reload.value == ""
+                                  ? InkWell(
+                                      onTap: () {
+                                        controller.upLoadPic();
+                                      },
+                                      child: Image.asset("images/profile1.png"),
+                                    )
+                                  : ClipOval(
+                                      child: Image.network(
+                                      controller.reload.value,
+                                      height: 80,
+                                      width: 80,
+                                      fit: BoxFit.fill,
+                                    )
+                                      // CachedNetworkImage(
 
-                                  //   imageUrl: controller.reload.value,
-                                  //   height: 100,
-                                  //   width: 100,
-                                  //   fit: BoxFit.fill,
-                                  //   progressIndicatorBuilder: (context, url,
-                                  //           downloadProgress) =>
-                                  //       CircularProgressIndicator(
-                                  //           value: downloadProgress.progress),
-                                  // ),
-                                  ),
-                        ),
-                      )),
+                                      //   imageUrl: controller.reload.value,
+                                      //   height: 100,
+                                      //   width: 100,
+                                      //   fit: BoxFit.fill,
+                                      //   progressIndicatorBuilder: (context, url,
+                                      //           downloadProgress) =>
+                                      //       CircularProgressIndicator(
+                                      //           value: downloadProgress.progress),
+                                      // ),
+                                      ),
+                            )),
+                      ),
                     ),
                     SizedBox(height: 15),
                     Padding(
@@ -177,7 +181,9 @@ class ProfilePage extends GetView<LandingController> {
                         textcolor: Colors.white,
                         ontap: () {
                           FirebaseAuth.instance.signOut();
-                          Get.back();
+
+                          Get.offAllNamed(Routes.LOGINSCREEN);
+                          MyPrefferenc.clear();
                         },
                         width: 240,
                         height: 50,

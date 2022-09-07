@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -71,7 +72,7 @@ class LoginScreen extends GetView<LoginController> {
                       ontap: () {
                         if (controller.loginformkey.currentState!.validate()) {
                           controller.isLoading.value = true;
-                          MyPrefferenc.saveEmail(controller.emailC.text);
+
                           Authentications.SignIn(controller.emailC.text,
                               controller.passwordC.text);
                           controller.isLoading.value = false;

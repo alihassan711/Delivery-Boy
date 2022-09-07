@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_application_1/app/UserModel/UserModel.dart';
+import 'package:flutter_application_1/app/data/Services.dart';
 import 'package:flutter_application_1/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
@@ -34,6 +35,7 @@ class Authentications {
           .then((value) => {
                 Get.snackbar("Login", "User is Logged in"),
                 Get.toNamed(Routes.LANDINGPAGE),
+                MyPrefferenc.saveId(FirebaseAuth.instance.currentUser!.uid),
               });
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
