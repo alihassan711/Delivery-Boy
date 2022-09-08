@@ -6,6 +6,7 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     nextScren();
+    UserNextScreen();
     super.onInit();
   }
 
@@ -19,5 +20,15 @@ class HomeController extends GetxController {
         () => d.isEmpty
             ? Get.offNamed(Routes.LOGINSCREEN)
             : Get.offNamed(Routes.LANDINGPAGE));
+  }
+
+  UserNextScreen() async {
+    // var d = MyPrefferenc.getId();
+    // print("ccccccccc$d");
+    await Future.delayed(
+        const Duration(
+          seconds: 3,
+        ),
+        () => Get.offNamed(Routes.USERLOGIN));
   }
 }

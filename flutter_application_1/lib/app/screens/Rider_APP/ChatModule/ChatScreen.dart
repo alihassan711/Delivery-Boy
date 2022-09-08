@@ -5,10 +5,11 @@ import 'package:flutter_application_1/app/constant/Color.dart';
 import 'package:flutter_application_1/app/modules/home/bindings/LandingPageBinding.dart';
 import 'package:flutter_application_1/app/modules/home/controllers/LandingController.dart';
 import 'package:flutter_application_1/app/modules/home/controllers/OrderDetailController.dart';
-import 'package:flutter_application_1/app/screens/ChatModule/SingleMessage.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/ChatModule/SingleMessage.dart';
 import 'package:flutter_application_1/app/utils.dart/DeliveryTextfield.dart';
 import 'package:flutter_application_1/app/utils.dart/MessageTextField.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 class UserChatScreen extends GetView<LandingController> {
   UserChatScreen({super.key});
@@ -17,7 +18,13 @@ class UserChatScreen extends GetView<LandingController> {
 
   @override
   Widget build(BuildContext context) {
-    print("dddddddddd$d");
+    final date = DateTime.now();
+    final time = DateFormat(
+            "${date.hour.toString()}-${date.minute.toString()}-${date.minute.toString()}")
+        .format(date);
+    final datee = DateFormat(
+            "${date.year.toString()}-${date.month.toString()}-${date.day.toString()}")
+        .format(date);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Abstract.btnColor,
@@ -69,7 +76,7 @@ class UserChatScreen extends GetView<LandingController> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: EcoTextField(
-                  labeltext: "Ass",
+                  labeltext: "Write a Message here..",
                   contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 0.0, 10.0),
                   controller: controller.messgC,
                   validator: (v) {},
@@ -85,7 +92,9 @@ class UserChatScreen extends GetView<LandingController> {
                         "id": d[1],
                         "name": d[0],
                         "rider_id": FirebaseAuth.instance.currentUser!.uid,
-                        "url": ""
+                        "url": "",
+                        "time": time,
+                        "date": datee
                       });
                       message = controller.messgC.text;
                       controller.messgC.clear();

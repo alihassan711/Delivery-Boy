@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/constant/Color.dart';
 import 'package:flutter_application_1/app/modules/home/controllers/LandingController.dart';
-import 'package:flutter_application_1/app/screens/DashBoard.dart';
-import 'package:flutter_application_1/app/screens/History.dart';
-import 'package:flutter_application_1/app/screens/ChatScreen.dart';
-import 'package:flutter_application_1/app/screens/Profile.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/ChatScreen.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/DashBoard.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/History.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/Profile.dart';
 import 'package:get/get.dart';
 
 class LandingPage extends GetView<LandingController> {

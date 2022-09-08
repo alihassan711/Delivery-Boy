@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/app/addData.dart';
 import 'package:flutter_application_1/app/constant/Color.dart';
@@ -5,8 +6,6 @@ import 'package:flutter_application_1/app/modules/home/controllers/LandingContro
 import 'package:flutter_application_1/app/widget/PersonORderDetail.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-
-import '../data/Services.dart';
 
 class DashBoard extends GetView<LandingController> {
   DashBoard({Key? key}) : super(key: key);
@@ -45,10 +44,7 @@ class DashBoard extends GetView<LandingController> {
                 itemCount: controller.snapshot!.docs.length,
                 itemBuilder: (BuildContext context, int i) {
                   var data = controller.snapshot!.docs[i];
-                  final date = DateTime.now();
-                  final today = DateFormat(
-                          "${date.year.toString()}-${date.month.toString()}-${date.day.toString()}")
-                      .format(date);
+
                   return data['order'] == false
                       ? Column(
                           children: [
@@ -58,7 +54,7 @@ class DashBoard extends GetView<LandingController> {
                               orderId: data["Order_id"],
                               paymentType: data['Payment_type'],
                               pickUp: data["PickUp"],
-                              time: today.toString(),
+                              time: data['Order_time'],
                               userName: data["User_name"],
                               phone: data["User_phone"],
                               uid: "5fgDYXmpX8MdatjYpC9MfazZ65N2",

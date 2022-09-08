@@ -54,14 +54,11 @@ class DeliveryTextField extends StatelessWidget {
             fillColor: fillColor,
             contentPadding: contentPadding,
             filled: true,
-            suffixIcon: Container(
-              child: IconButton(
-                padding: EdgeInsets.zero,
-                onPressed: onPressed,
-                icon: Icon(
-                  icon,
-                  color: Abstract.btnColor,
-                ),
+            suffixIcon: InkWell(
+              onTap: onPressed,
+              child: Icon(
+                icon,
+                color: Abstract.btnColor,
               ),
             ),
             focusedErrorBorder: OutlineInputBorder(

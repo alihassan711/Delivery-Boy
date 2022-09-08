@@ -10,6 +10,7 @@ class SignupController extends GetxController {
   TextEditingController emailSC = TextEditingController();
   TextEditingController passwordSC = TextEditingController();
   TextEditingController phoneSC = TextEditingController();
+  TextEditingController address = TextEditingController();
   RxBool isLoading = false.obs;
   RxBool check = false.obs;
 

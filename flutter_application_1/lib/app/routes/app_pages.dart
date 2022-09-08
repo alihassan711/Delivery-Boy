@@ -4,29 +4,29 @@ import 'package:flutter_application_1/app/modules/home/bindings/LoginBinding.dar
 import 'package:flutter_application_1/app/modules/home/bindings/OrderDetailBinding.dart';
 import 'package:flutter_application_1/app/modules/home/bindings/ResetBinding.dart';
 import 'package:flutter_application_1/app/modules/home/bindings/SignupBinding.dart';
-import 'package:flutter_application_1/app/screens/ChatModule/ChatScreen.dart';
-import 'package:flutter_application_1/app/screens/CheckAuthentication.dart';
-import 'package:flutter_application_1/app/screens/DashBoard.dart';
-import 'package:flutter_application_1/app/screens/Directions.dart';
-import 'package:flutter_application_1/app/screens/History.dart';
-import 'package:flutter_application_1/app/screens/LandingPage.dart';
-import 'package:flutter_application_1/app/screens/LoginScreen.dart';
-import 'package:flutter_application_1/app/screens/ChatScreen.dart';
-import 'package:flutter_application_1/app/screens/OrderDetails.dart';
-import 'package:flutter_application_1/app/screens/Profile.dart';
-import 'package:flutter_application_1/app/screens/ResetPassword.dart';
-import 'package:flutter_application_1/app/screens/SignUp.dart';
+import 'package:flutter_application_1/app/screens/Checking.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/ChatModule/ChatScreen.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/ChatScreen.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/DashBoard.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/Directions.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/History.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/LandingPage.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/LoginScreen.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/OrderDetails.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/Profile.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/ResetPassword.dart';
+import 'package:flutter_application_1/app/screens/Rider_APP/SignUp.dart';
 import 'package:get/get.dart';
 
 import '../modules/home/bindings/home_binding.dart';
-import '../modules/home/views/home_view.dart';
+import '../modules/home/views/RiderSplash.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SPLASH;
 
   static final routes = [
     GetPage(

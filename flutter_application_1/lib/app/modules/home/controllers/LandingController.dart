@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 class LandingController extends GetxController
     with GetSingleTickerProviderStateMixin {
   RxInt bottomTabIndex = 0.obs;
-
+  RxBool chnage = false.obs;
   void changeTabIndex(int index) {
     bottomTabIndex.value = index;
   }
@@ -42,19 +42,14 @@ class LandingController extends GetxController
 
   // Profile
   RxString reload = "".obs;
+  var dowurl;
   final ImagePicker picker = ImagePicker();
   Reference ref = FirebaseStorage.instance.ref().child("images/");
   Future upLoadPic() async {
     XFile? image = await picker.pickImage(source: ImageSource.gallery);
     await ref.putData(await image!.readAsBytes());
-    var dowurl = await ref.getDownloadURL();
+    dowurl = await ref.getDownloadURL();
     SettableMetadata(contentType: "images/jpeg");
-
-    await FirebaseFirestore.instance
-        .collection("user")
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .update({"url": dowurl});
-    return dowurl;
   }
 
   RxBool ischeck = false.obs;

@@ -9,5 +9,7 @@ class ResetController extends GetxController {
   TextEditingController passwordC = TextEditingController();
   TextEditingController repasswordC = TextEditingController();
   RxBool check = false.obs;
+  RxBool recheck = false.obs;
+  RxBool reischeck = false.obs;
   var formkey = GlobalKey<FormState>();
 }

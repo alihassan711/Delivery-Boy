@@ -62,13 +62,11 @@ class Authentications {
           Get.snackbar("Message", "Password Can't Be channged${e.toString()}");
         });
       }).catchError((e) {
-        print(e.toString());
+        Get.snackbar("Old Passwprd", "${e}");
       });
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+      if (e.code == 'wrong-password') {
+        Get.snackbar("Old Passwprd", "${e.code}");
       }
     }
   }

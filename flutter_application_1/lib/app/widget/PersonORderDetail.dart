@@ -107,9 +107,15 @@ class PersonOrderDetails extends GetView<LandingController> {
                                   style: TextStyle(color: Abstract.lowColor),
                                 ),
                                 SizedBox(height: 5),
-                                Text(
-                                  orderId,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  child: Text(
+                                    orderId,
+                                    maxLines: 1,
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                               ],
                             ),

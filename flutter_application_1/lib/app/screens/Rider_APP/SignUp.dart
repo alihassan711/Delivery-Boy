@@ -47,7 +47,7 @@ class SignUpScreen extends GetView<SignupController> {
                     color: Colors.transparent,
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 DeliveryTextField(
                   labeltext: "Email",
                   controller: controller.emailSC,
@@ -59,7 +59,7 @@ class SignUpScreen extends GetView<SignupController> {
                     color: Colors.transparent,
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 DeliveryTextField(
                   labeltext: "phone Number",
                   controller: controller.phoneSC,
@@ -74,7 +74,34 @@ class SignUpScreen extends GetView<SignupController> {
                     color: Colors.transparent,
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
+                DeliveryTextField(
+                  labeltext: "Adrees",
+                  controller: controller.address,
+                  obsecure: false,
+                  validator: (v) {
+                    return validateEmail(v);
+                  },
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                  ),
+                ),
+                SizedBox(height: 10),
+                DeliveryTextField(
+                  labeltext: "phone Number",
+                  controller: controller.phoneSC,
+                  keyboardType: TextInputType.number,
+                  obsecure: false,
+                  validator: (v) {
+                    if (v!.length <= 10) {
+                      return "Length Should be 11";
+                    }
+                  },
+                  borderSide: BorderSide(
+                    color: Colors.transparent,
+                  ),
+                ),
+                SizedBox(height: 10),
                 Obx(
                   () => DeliveryTextField(
                     labeltext: "Password",
@@ -113,7 +140,9 @@ class SignUpScreen extends GetView<SignupController> {
                                     id: FirebaseAuth.instance.currentUser!.uid,
                                     name: controller.nameSC.text,
                                     phone: controller.phoneSC.text,
-                                    type: "rider"),
+                                    type: "rider",
+                                    address: controller.address.text,
+                                    url: ""),
                               ),
                               controller.isLoading.value = false,
                               controller.emailSC.clear(),

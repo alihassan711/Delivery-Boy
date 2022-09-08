@@ -97,6 +97,14 @@ class OrderDetail extends GetView<OrderDetailController> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: InkWell(
+                      splashColor: Colors.white,
+                      overlayColor: MaterialStateProperty.resolveWith(
+                        (states) {
+                          return states.contains(MaterialState.pressed)
+                              ? Colors.transparent
+                              : null;
+                        },
+                      ),
                       onTap: () {
                         Get.toNamed(Routes.USERCHATSCREEN,
                             arguments: [d[2], d[6]]);
@@ -104,10 +112,11 @@ class OrderDetail extends GetView<OrderDetailController> {
                       child: Container(
                         height: 25,
                         width: 25,
-                        decoration: BoxDecoration(),
-                        child: Image.asset(
-                          "images/icon.png",
-                          color: Colors.white,
+                        child: Center(
+                          child: Image.asset(
+                            "images/icon.png",
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),

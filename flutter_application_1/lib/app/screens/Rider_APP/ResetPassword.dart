@@ -66,12 +66,12 @@ class ResetPassword extends GetView<ResetController> {
               () => DeliveryTextField(
                 labeltext: "New Password",
                 controller: controller.passwordC,
-                icon: controller.check.value
+                icon: controller.recheck.value
                     ? Icons.remove_red_eye
                     : Icons.visibility_off,
-                obsecure: controller.check.value ? false : true,
+                obsecure: controller.recheck.value ? false : true,
                 onPressed: () {
-                  controller.check.value = !controller.check.value;
+                  controller.recheck.value = !controller.recheck.value;
                 },
                 validator: (v) {
                   if (v!.length <= 5) {
@@ -88,12 +88,12 @@ class ResetPassword extends GetView<ResetController> {
               () => DeliveryTextField(
                 labeltext: "Confirm Password",
                 controller: controller.repasswordC,
-                icon: controller.check.value
+                icon: controller.reischeck.value
                     ? Icons.remove_red_eye
                     : Icons.visibility_off,
-                obsecure: controller.check.value ? false : true,
+                obsecure: controller.reischeck.value ? false : true,
                 onPressed: () {
-                  controller.check.value = !controller.check.value;
+                  controller.reischeck.value = !controller.reischeck.value;
                 },
                 validator: (v) {
                   if (controller.passwordC.text !=
